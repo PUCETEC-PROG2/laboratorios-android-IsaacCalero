@@ -23,7 +23,7 @@ fun RepoLs () {
         )
         RepoIt(
             name = "Repositorio Proyecto Integrador",
-            description = "Proyecto Integrador Fianl",
+            description = "Proyecto Integrador Final",
             avatarImg = "https://www.wearetriple.com/media/5v0o4wuh/max-verstappen-lion.jpg?width=1240&v=1d6f3436c839750",
             language = "TypeScript"
         )
