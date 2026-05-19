@@ -17,13 +17,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import ec.edu.puce.githubclient.models.GithubUser
+import ec.edu.puce.githubclient.models.Repository
 
 @Composable
 fun RepoIt(
-    name: String,
-    description: String,
-    avatarImg: String,
-    language: String
+    repository: Repository
 ) {
     Card(
         modifier = Modifier
@@ -36,29 +35,33 @@ fun RepoIt(
                 .padding(all = 16.dp)
         ) {
             AsyncImage(
-                model = avatarImg,
-                contentDescription = "Imagen de $name",
+                model = repository.owner.avatarUrl,
+                contentDescription = "Imagen de ${repository.name}",
                 modifier = Modifier.size(size = 60.dp),
                 contentScale = ContentScale.Crop
             )
             Spacer(modifier = Modifier.width(width = 16.dp))
             Column {
                 Text(
-                    text = name,
+                    text = repository.name,
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold
                 )
                 Spacer(modifier = Modifier.width(width = 4.dp))
-                Text(
-                    text = description,
-                    style = MaterialTheme.typography.bodyMedium,
-                    maxLines = 3
-                )
+                repository.description?.let {
+                    Text(
+                        text = it,
+                        style = MaterialTheme.typography.bodyMedium,
+                        maxLines = 3
+                    )
+                }
                 Spacer(modifier = Modifier.width(width = 4.dp))
-                Text(
-                    text = language,
-                    style = MaterialTheme.typography.labelSmall
-                )
+                repository.language?.let {
+                     Text(
+                        text = it,
+                        style = MaterialTheme.typography.labelSmall
+                    )
+                }
             }
         }
     }
@@ -66,11 +69,17 @@ fun RepoIt(
 
 @Preview(showBackground = true)
 @Composable
-fun RepoItpreview() {
-    RepoIt(
-        name = "Repositorio de Isaac",
-        description = "Proyecto de Desarrollo Web",
-        avatarImg = "https://via.placeholder.com/150",
-        language = "React"
+fun RepoItreview() {
+    val repository: Repository = Repository(
+        id = "201907",
+        name = "Repositorio Gitlab",
+        description = "Descripción del Repositorio",
+        language = "Git",
+        owner = GithubUser(
+            id = "201907",
+            login = "IsaacCalero",
+            avatarUrl = "https://www.wearetriple.com/media/5v0o4wuh/max-verstappen-lion.jpg?width=1240&v=1d6f3436c839750"
+        )
     )
+    RepoIt(repository)
 }
