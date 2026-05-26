@@ -42,16 +42,18 @@ fun RepoLs (
 
     Scaffold (
         floatingActionButton = {
-            FloatingActionButton(
-                onClick = onNavigateToForm,
-                shape = CircleShape,
-                containerColor = MaterialTheme.colorScheme.primaryContainer,
-                contentColor = MaterialTheme.colorScheme.onPrimaryContainer
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Add,
-                    contentDescription = "Añadir Repositorio"
-                )
+            if (!isLoading && errorMsg == null){
+                FloatingActionButton(
+                    onClick = onNavigateToForm,
+                    shape = CircleShape,
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Add,
+                        contentDescription = "Añadir Repositorio"
+                    )
+                }
             }
         }
 
